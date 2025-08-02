@@ -1,0 +1,303 @@
+{% layout 'theme.test' %}
+
+<h1>vikkas</h1>
+
+<!doctype html>
+<html amp lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ article.title }}</title>
+  <link rel="canonical" href="{{ canonical_url }}">
+   <meta name="description" content="{{ article.metafields.global.description_tag | strip_html | strip_newlines | escape }}">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <meta name="robots" content="index">
+  <link rel="icon" type="image/png" href="https://cdn.shopify.com/s/files/1/0528/5173/6769/files/favicon-tps.png?v=1751441549">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+
+<noscript>
+    <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}
+        
+    </style>
+</noscript> 
+  <style amp-custom>
+    amp-story-grid-layer { padding: 0px; }
+    .blur-bg { filter: blur(20px); transform: scale(1.2); opacity: 0.5; }
+    .webPage-info {
+      background: linear-gradient(0deg, #000 3.125%, rgba(0, 0, 0, 0) 58.75%);
+    }
+    .webHead-info {
+      background: linear-gradient(0deg, rgb(6 71 61) 9.375%, rgba(62, 6, 94, 0) 71.25%, rgba(0, 0, 0, .73) 99.375%);
+    }
+    .text-box {
+      padding: 30px 20px 20px 20px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      color: #fff;
+      right: 0;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      font-family: Lato, sans-serif;
+    }
+    .text-box h2 { font-size: 28px; line-height: 1.4em; }
+    .text-box h1 {
+      font-size: 38px;
+      text-align: left;
+      font-weight: 600;
+      margin-top: 20px;
+      line-height: 1.4em;
+      word-break: break-word;
+    }
+    .websHr { width: 100px; height: 2px; border: 0; margin: 15px 0 10px 0; }
+    .websHr-first, .websHr-second { background: #fff; }
+    .websHr-second { width: 80px; }
+    .text-box p {
+      color: #fff;
+      font-size: 21px;
+      font-weight: 400;
+      line-height: 1.4em;
+      margin-top: 18px;
+    }
+    .webStory-date {
+      display: inline;
+      text-align: left;
+      padding: 10px;
+      background: #1e1e1e;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .text-box a {
+      color: #fff;
+      font-size: 15px;
+      text-decoration: none;
+    }
+    .slide-logo {
+      position: absolute;
+      top: 40px;
+      left: 30px;
+      width: 80px;
+      height: auto;
+      z-index: 10;
+    }
+    .webThanks-readmore {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      margin-top: 15px;
+    }
+    .webPage-lastText-box h2 {
+      margin-bottom: 3rem;
+      font-size: 32px;
+    }
+    .webThanks-readmore svg {
+      width: 30px;
+      fill: #fff;
+    }
+    .webPage-recommended-story{
+      top: 0;
+    height: 100%;
+      padding:0;
+    }
+    .webPage-recommended-story h2{
+      margin-bottom: 1rem;
+    background: #044137a3;
+    text-align: center;
+    padding: 15px 0;
+    
+    }
+
+    .webPage-recommended-story amp-img{
+
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    }
+    .webPage-recommended-story amp-img img{
+      border-radius:6px;
+      width: 100%;
+    height: 100%;
+   max-width: 180px;
+    max-height: 12rem; 
+      object-fit:cover;
+    }
+   .recommended-stories-container.grid-layout {
+  display: grid;
+grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.recommended-stories-container.grid-layout .amp-recommended-story{
+  max-width: 200px;
+}
+    .recommended-stories-container .recommended-webstory-title{
+       margin: -31px 20px 0px 20px;
+       font-size: 16px;
+    }
+    .recommended-stories-container.grid-layout .recommended-webstory-title{
+      max-width:160px;
+      margin: -40px 20px 0px 20px;
+       font-size:12px;
+    }
+.recommended-stories-container.column-layout {
+  display: flex;
+  flex-direction: column;
+}
+    .webPage-lastText-box {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .webImage-source {
+      color: #fff;
+      font-size: 12px;
+      line-height: 1.4em;
+      letter-spacing: 1px;
+      font-weight: 400;
+    }
+     amp-story-page[active]:not(:first-of-type) .zoom-out {
+      animation: zoomOut 3s ease-out forwards;
+    }
+     @keyframes zoomOut {
+      0% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    @media screen and (max-width:1400px){
+      .webPage-recommended-story h2{
+        font-size:20px;
+      }
+      .webPage-recommended-story amp-img img{
+        max-width: 180px;
+    /* max-height: 200px; */
+      }
+    }
+    @media screen and (max-width:768px){
+    
+       .recommended-stories-container.grid-layout {
+ row-gap:10px;
+}
+  }
+  @media screen and (max-width:664px){
+    .webPage-recommended-story amp-img img{
+      max-width: 250px;
+      /* max-height: 270px; */
+    }
+  }
+  </style>
+  
+</head>
+<body>
+<amp-story standalone
+  title="{{ article.title }}"
+  publisher="{{ article.author }}"
+  publisher-logo-src="https://www.thepahadistory.com/cdn/shop/files/TPS_lOGO-04_2.png?v=1658988896&width=470"
+  poster-portrait-src="{{ article.image | img_url: '1000x1000' }}">
+  <amp-story-page auto-advance-after="5s" id="page-0">
+    <amp-story-grid-layer template="fill">
+      <amp-img src="{{ article.image | img_url: 'master'}}" width="720" height="1280" layout="responsive" alt="{{ article.title }}" class="blur-bg"></amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer template="vertical">
+      <amp-img src="{{ article.image | img_url: 'master'}}" width="720" height="1280" layout="responsive" alt="{{ article.title }}" class="zoom-out"></amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer class="webHead-info" template="vertical">
+      <amp-img src="https://cdn.shopify.com/s/files/1/0528/5173/6769/files/favicon-tps.png?v=1751441549"
+        width="50" height="50" layout="fixed" alt="Logo" class="slide-logo"></amp-img>
+      <div class="text-box">
+        <p class="webStory-date">{{ article.published_at | date: "%B %d, %Y" }}</p>
+        <h1>{{ article.title }}</h1>
+        <hr class="websHr websHr-first">
+      </div>
+    </amp-story-grid-layer>
+  </amp-story-page>
+  {% for block in article.metafields.custom.web_story.value %}
+  <amp-story-page auto-advance-after="5s" id="page-{{ forloop.index }}">
+    <amp-story-grid-layer template="fill">
+      <amp-img src="{{ block.story_image | img_url: 'master' }}" width="720" height="1280" layout="responsive" alt="{{ block.story_title | default: 'Story image' }}" class="blur-bg"></amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer template="vertical">
+      <amp-img src="{{ block.story_image | img_url: 'master' }}" width="720" height="1280" layout="responsive" alt="{{ block.story_title | default: 'Story image' }}" class="zoom-out "></amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer class="webPage-info" template="vertical">
+       <amp-img src="https://cdn.shopify.com/s/files/1/0528/5173/6769/files/favicon-tps.png?v=1751441549"
+    width="50" height="50" layout="fixed" class="slide-logo"></amp-img>
+       
+{% assign recommended_stories = article.metafields.custom.recommended_web_stories.value %}
+{% assign first_story = recommended_stories.first %}
+{% assign story_count = 0 %}
+{% for s in recommended_stories %}
+  {% assign story_count = story_count | plus: 1 %}
+{% endfor %}
+      {% if block.show_last_slide %}
+      <div class="text-box webPage-lastText-box">
+        <p class="webThanks">Thanks for reading! <br><br> See next</p>
+        <h2>{{ block.last_page_title }}</h2>
+        <!-- <div class="webThanks-readmore">
+          <svg viewBox="0 0 24 24">
+            <path fill-opacity=".1" d="M12 0c6.6 0 12 5.4 12 12s-5.4 12-12 12S0 18.6 0 12 5.4 0 12 0z"></path>
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
+          </svg>
+          {% if block.story_button_link != blank %}
+          <a href="{{ block.story_button_link }}">{{ block.story_button_name }}</a>
+          {% endif %}
+        </div> -->
+      </div>
+      {% elsif block.show_recommended_stories == true %}
+  
+  <!-- Recommended Stories Section -->
+  <div class="text-box webPage-recommended-story">
+    {% if block.story_title != blank %}
+        <h2 style="margin-bottom: 0;">{{ block.story_title }}</h2>
+      {% endif %}
+    <div class="recommended-stories-container {% if story_count > 2 %}grid-layout{% else %}column-layout{% endif %}" style="gap: 20px; align-items: center; padding:20px;">
+      {% for story in recommended_stories %}
+        {% assign image = story.amp_story_image %}
+        {% assign link = story.amp_web_story_link %}
+        {% assign title = story.title %}
+        {% if image and link %}
+         <div class="amp-recommended-story">
+           
+        <a href="{{ link }}" style="text-decoration: none; text-align: center;" class="recommended-story-card">
+          <amp-img src="{{ image | file_url }}" width="164px" height="225px" layout="responsive"
+            style="border: 2px solid #fff; border-radius: 8px; z-index:-1;"></amp-img>
+          <p class="recommended-webstory-title" style="color: #fff;     background: rgb(4 70 60); padding: 5px 10px; font-weight: bold; max-width: 200px;
+        border-radius: 6px;">
+            {{ title }}
+          </p>
+        </a>
+         </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+      {% else %}
+      <div class="text-box">
+        {% if block.story_title != blank %}
+        <h2>{{ block.story_title }}</h2>
+        {% endif %}
+        {% if block.story_description != blank %}
+        <p>{{ block.story_description }}</p>
+        {% endif %}
+        {% if block.story_button_link == blank %}
+        <hr class="websHr websHr-second">
+        {% endif %}
+        {% if block.image_source != blank %}
+        <p class="webImage-source">{{ block.image_source }}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+    </amp-story-grid-layer>
+    {% if block.story_button_link != blank %}
+  <amp-story-page-attachment
+    layout="nodisplay"
+    href="{{ block.story_button_link }}">
+  </amp-story-page-attachment>
+{% endif %}
+  </amp-story-page>
+  {% endfor %}
+</amp-story>
+
+
+ 
+</body>
+</html>

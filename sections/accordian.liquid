@@ -1,0 +1,146 @@
+{% schema %}
+{
+  "name": "Auto Height FAQ Accordion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "faq_heading",
+      "label": "FAQ Heading",
+      "default": "Frequently Asked Questions"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Auto Height FAQ Accordion",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="faq-wrapper page-width" id="faq-{{ section.id }}">
+  {% if section.settings.faq_heading != blank %}
+    <h2 class="faq-title">{{ section.settings.faq_heading }}</h2>
+  {% endif %}
+
+  <div class="faq-list">
+    {% for block in section.blocks %}
+      <div class="faq-item{% if forloop.first %} active{% endif %}">
+        <button class="faq-question" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+          <span>{{ block.settings.question }}</span>
+          <span class="faq-icon">^</span>
+        </button>
+        <div class="faq-answer-wrapper" style="{% if forloop.first %}max-height: 1000px{% else %}max-height: 0{% endif %};">
+          <div class="faq-answer">
+            {{ block.settings.answer }}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .faq-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: #086553;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+
+  .faq-item {
+    border-radius: 10px;
+    border: 1px solid #f3eae4;
+    background: #fdf8f5;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .faq-question {
+    width: 100%;
+    padding: 18px 20px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #086553;
+    background: transparent;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  .faq-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .faq-item.active .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer-wrapper {
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .faq-answer {
+    padding: 10px 20px 20px;
+    font-size: 15px;
+    color: #1e1e1e;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const faqSection = document.querySelector('#faq-{{ section.id }}');
+    const items = faqSection.querySelectorAll(".faq-item");
+
+    items.forEach(item => {
+      const btn = item.querySelector(".faq-question");
+      const wrapper = item.querySelector(".faq-answer-wrapper");
+
+      btn.addEventListener("click", function () {
+        const isOpen = item.classList.contains("active");
+
+        // Close all
+        items.forEach(i => {
+          i.classList.remove("active");
+          i.querySelector(".faq-question").setAttribute("aria-expanded", "false");
+          i.querySelector(".faq-answer-wrapper").style.maxHeight = 0;
+        });
+
+        if (!isOpen) {
+          item.classList.add("active");
+          btn.setAttribute("aria-expanded", "true");
+          wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+        }
+      });
+    });
+  });
+</script>

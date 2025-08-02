@@ -1,0 +1,217 @@
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+{% if section.settings.collection != blank %}
+  <div class="collection-slider-wrapper page-width" id="collection-{{ section.id }}">
+    
+    {% if section.settings.heading != blank %}
+      <h2 class="collection-slider-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+  
+    <div class="collection-product-wrapper swiper-container">
+      <div class="swiper-wrapper">
+        {% for collection_handle in section.settings.collection %}
+          <div class="swiper-slide">
+            <a href="{{ collection_handle.url }}" class="product-card">
+              <div class="product-image {% if section.settings.round_image %}round{% endif %}">
+                <img src="{{ collection_handle.image | img_url: width: 400 }}" alt="{{ collection_handle.title }}">
+              </div>
+              <p class="product-title {% if section.settings.show_arrow_and_align_left %}left-arrow{% endif %}">
+                {{ collection_handle.title }}
+                {% if section.settings.show_arrow_and_align_left %}
+                  <span class="arrow">→</span>
+                {% endif %}
+              </p>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if section.settings.collection.first %}
+      <div class="collection-slider-button">
+        <a href="{{ section.settings.collection.first.url }}" class="view-all-btn">{{ section.settings.button_label }}</a>
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
+
+<style>
+#collection-{{ section.id }} {
+  text-align: center;
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+}
+
+#collection-{{ section.id }} .collection-slider-heading {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+#collection-{{ section.id }} .product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+#collection-{{ section.id }} .product-image.round img {
+  border-radius: 50%;
+}
+
+#collection-{{ section.id }} .product-title {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+
+/* Left align + arrow */
+#collection-{{ section.id }} .product-title.left-arrow {
+  text-align: left;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+#collection-{{ section.id }} .product-title.left-arrow .arrow {
+  font-size: 1.2rem;
+  margin-left: 10px;
+}
+
+/* View All Button */
+#collection-{{ section.id }} .view-all-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.6rem 1.5rem;
+  background-color: #000;
+  color: #fff;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Desktop: Grid */
+#collection-{{ section.id }} .collection-product-wrapper .swiper-wrapper {
+  display: grid;
+  grid-template-columns: repeat({{ section.settings.grid_column }}, 1fr);
+  gap: 1.5rem;
+}
+
+/* Mobile: Swiper */
+@media screen and (max-width: 768px) {
+  #collection-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mob }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+  }
+
+  #collection-{{ section.id }} .collection-product-wrapper .swiper-wrapper {
+    display: flex;
+  }
+
+  #collection-{{ section.id }} .collection-product-wrapper .swiper-slide {
+    width: 60%;
+    flex-shrink: 0;
+  }
+}
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (window.innerWidth <= 768) {
+      new Swiper(".collection-product-wrapper", {
+        slidesPerView: 2,
+        spaceBetween: 16,
+        loop: true,
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Collection Slider",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mob",
+      "label": "Padding top mobile (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "label": "Padding bottom mobile (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Explore Our Collection"
+    },
+    {
+      "type": "collection_list",
+      "id": "collection",
+      "label": "Select Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "round_image",
+      "label": "Make images round?",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Text",
+      "default": "View All"
+    },
+    {
+      "type": "range",
+      "id": "grid_column",
+      "label": "Grid columns (desktop)",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrow_and_align_left",
+      "label": "Align text left and show arrow?",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "punit"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,198 @@
+
+<div class="custom-faw-sect page-width"id="faq-{{ section.id }}">
+  {% if section.settings.faq_heading != blank %}
+      <h3 class="faq-heading">{{ section.settings.faq_heading }} </h3>
+  {% endif %}
+ {%- assign faqs = product.metafields.custom.faq_content.value -%}
+
+{%- if faqs != blank -%}
+  {%- for faq in faqs -%}
+   <div class="faq-list">
+    {% for block in section.blocks %}
+      <div class="faq-item{% if forloop.first %} active{% endif %}">
+        <button class="faq-question" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+          <span>{{ faq.question }}</span>
+          <span class="faq-icon">^</span>
+        </button>
+        <div class="faq-answer-wrapper" style="{% if forloop.first %}max-height: 1000px{% else %}max-height: 0{% endif %};">
+          <div class="faq-answer">
+            {{ faq.answer }}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {%- endfor -%}
+
+{%- elsif section.blocks.size > 0 -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings.content != blank or block.settings.page.content != blank -%}
+     <div class="faq-list">
+    {% for block in section.blocks %}
+      <div class="faq-item{% if forloop.first %} active{% endif %}">
+        <button class="faq-question" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+          <span>{{ block.settings.question }}</span>
+          <span class="faq-icon">^</span>
+        </button>
+        <div class="faq-answer-wrapper" style="{% if forloop.first %}max-height: 1000px{% else %}max-height: 0{% endif %};">
+          <div class="faq-answer">
+            {{ block.settings.answer }}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+</div>
+{% schema %}
+{
+  "name": "Faq product",
+  "settings": [
+     {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top Desktop",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom Desktop",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+     {
+      "type": "range",
+      "id": "padding_top_mob",
+      "label": "Padding Top Mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "label": "Padding Bottom Mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "faq_heading",
+      "label": "Faq Heading"
+    }
+  ],
+   "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  
+  "presets": [
+    {
+      "name": "Faq product"
+    }
+  ]
+}
+{% endschema %}
+<style>
+   #faq-{{ section.id }}{
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #faq-{{ section.id }} .faq-collpsible{
+    border:none;
+    background:#fff;
+    border-radius:10px;
+    margin: 10px 0px;
+  }
+   #faq-{{ section.id }} .accordian-ans-prp{
+    color:#1e1e1e;
+    font-weight:500;
+          width:90%;
+  }
+  #faq-{{ section.id }} .accordian-ques-prp{
+    color: #086553;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 1px !important;
+    max-width: 90% !important;
+    text-transform:capitalize;
+  }
+  #faq-{{ section.id }}  .faq-collpsible details summary svg{
+  stroke:#0d6657;
+  } 
+  #faq-{{ section.id }}  .faq-heading{
+    font-size: 40px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  @media(max-width:768px){
+    #faq-{{ section.id }}{
+    padding-top: {{ section.settings.padding_top_mob }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+  }
+     #faq-{{ section.id }}  .faq-heading{
+       font-size:28px;
+     }
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const faqSection = document.querySelector('#faq-{{ section.id }}');
+    const items = faqSection.querySelectorAll(".faq-item");
+
+    items.forEach(item => {
+      const btn = item.querySelector(".faq-question");
+      const wrapper = item.querySelector(".faq-answer-wrapper");
+
+      btn.addEventListener("click", function () {
+        const isOpen = item.classList.contains("active");
+
+        // Close all
+        items.forEach(i => {
+          i.classList.remove("active");
+          i.querySelector(".faq-question").setAttribute("aria-expanded", "false");
+          i.querySelector(".faq-answer-wrapper").style.maxHeight = 0;
+        });
+
+        if (!isOpen) {
+          item.classList.add("active");
+          btn.setAttribute("aria-expanded", "true");
+          wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+        }
+      });
+    });
+  });
+</script>
+
+
