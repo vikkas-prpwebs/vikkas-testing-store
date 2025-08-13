@@ -153,6 +153,11 @@
         "type": "shopify://apps/kite-discount-free-gift/blocks/app-embed/2c7302c4-455d-4078-a829-48563ba26089",
         "disabled": false,
         "settings": {}
+      },
+      "11128031370435530746": {
+        "type": "shopify://apps/cro-cart-drawer-free-gifts/blocks/app-embed/285be1af-7782-4800-bed8-6f91aa670a88",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
