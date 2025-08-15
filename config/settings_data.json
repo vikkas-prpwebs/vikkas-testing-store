@@ -142,20 +142,8 @@
     },
     "content_for_index": [],
     "blocks": {
-      "1530068250781986104": {
-        "type": "shopify://apps/fbp-fast-bundle/blocks/fast_bundle/9e87fbe2-9041-4c23-acf5-322413994cef",
-        "disabled": false,
-        "settings": {
-          "home": false
-        }
-      },
-      "8218531531362863771": {
-        "type": "shopify://apps/kite-discount-free-gift/blocks/app-embed/2c7302c4-455d-4078-a829-48563ba26089",
-        "disabled": false,
-        "settings": {}
-      },
-      "11128031370435530746": {
-        "type": "shopify://apps/cro-cart-drawer-free-gifts/blocks/app-embed/285be1af-7782-4800-bed8-6f91aa670a88",
+      "18071877742361319197": {
+        "type": "shopify://apps/dr-free-gift/blocks/instant-load/5942fed7-47f4-451f-a42f-9077b6214264",
         "disabled": false,
         "settings": {}
       }
