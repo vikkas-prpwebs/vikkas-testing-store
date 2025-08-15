@@ -142,9 +142,14 @@
     },
     "content_for_index": [],
     "blocks": {
+      "9022822286719573313": {
+        "type": "shopify://apps/aiod-automatic-discount-gift/blocks/free-gift-manager/f216dffa-6875-4930-b932-dd7950bc93e6",
+        "disabled": false,
+        "settings": {}
+      },
       "5419952609722095102": {
         "type": "shopify://apps/gift-box/blocks/head/f53ea332-e066-453a-9116-800349284dfb",
-        "disabled": false,
+        "disabled": true,
         "settings": {
           "script_load_mode": "sync"
         }
